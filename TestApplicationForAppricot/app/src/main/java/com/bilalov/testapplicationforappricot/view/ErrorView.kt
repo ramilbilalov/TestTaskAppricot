@@ -31,6 +31,9 @@ fun ErrorView(url: String, context: Application, viewModel: MainViewModel) {
     TestApplicationForAppricotTheme {
 
         var refreshing by rememberSaveable { mutableStateOf(false) }
+        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.radio_tower))
+        val progress by animateLottieCompositionAsState(composition)
+
 
         Scaffold(
             modifier = Modifier
@@ -66,10 +69,7 @@ fun ErrorView(url: String, context: Application, viewModel: MainViewModel) {
                     verticalArrangement = Arrangement.Center
                 ) {
                     items(count = 1) {
-                        Image(
-                            painter = painterResource(id = R.drawable.connection_lost),
-                            contentDescription = "ConnectionIsLost"
-                        )
+                        LottieAnimation(composition = composition, progress =progress )
                         Row(
                             horizontalArrangement = Arrangement.Center,
                             modifier = Modifier.padding(10.dp, 10.dp, 10.dp, 10.dp)
